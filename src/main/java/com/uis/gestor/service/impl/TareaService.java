@@ -28,6 +28,7 @@ public class TareaService implements ITareaService {
 
     @Override
     public TareaDTO crear(TareaDTO tareaDTO){
+        tareaDTO.setId(null);
         Tarea tarea = TareaMapper.INSTANCE.toTarea(tareaDTO);
         Tarea tareaCreada = this.iTareaRepository.save(tarea);
         return TareaMapper.INSTANCE.toTareaDTO(tareaCreada);

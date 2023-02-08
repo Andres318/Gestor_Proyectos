@@ -16,7 +16,6 @@ public class TareaDTO implements Serializable {
 
     private static final long serialVersionUID = 1194773724605235898L;
 
-    @NotNull
     private Long id;
 
     @NotNull
