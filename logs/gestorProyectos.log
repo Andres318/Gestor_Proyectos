@@ -1,0 +1,35 @@
+2023-02-08 00:30:11.900  INFO 4316 --- [main] com.uis.gestor.GestorApplication         : Starting GestorApplication using Java 11.0.1 on DESKTOP-FHMNHJ2 with PID 4316 (C:\Users\ADMIN\Documents\Proyecto Software 2\Gestor_Proyectos\target\classes started by ADMIN in C:\Users\ADMIN\Documents\Proyecto Software 2\Gestor_Proyectos)
+2023-02-08 00:30:11.902  INFO 4316 --- [main] com.uis.gestor.GestorApplication         : No active profile set, falling back to 1 default profile: "default"
+2023-02-08 00:30:12.380  INFO 4316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-02-08 00:30:12.381  INFO 4316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2023-02-08 00:30:12.399  INFO 4316 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.uis.gestor.repository.IProyectoRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-02-08 00:30:12.400  INFO 4316 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.uis.gestor.repository.ITareaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2023-02-08 00:30:12.400  INFO 4316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 JDBC repository interfaces.
+2023-02-08 00:30:12.405  INFO 4316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-02-08 00:30:12.405  INFO 4316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-08 00:30:12.429  INFO 4316 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 2 JPA repository interfaces.
+2023-02-08 00:30:12.839  INFO 4316 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-02-08 00:30:12.848  INFO 4316 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-08 00:30:12.849  INFO 4316 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-02-08 00:30:12.943  INFO 4316 --- [main] o.a.c.c.C.[.[.[/gestorProyectos/api]     : Initializing Spring embedded WebApplicationContext
+2023-02-08 00:30:12.944  INFO 4316 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1012 ms
+2023-02-08 00:30:13.079  INFO 4316 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-08 00:30:13.120  INFO 4316 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2023-02-08 00:30:13.213  INFO 4316 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-08 00:30:13.271  INFO 4316 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-08 00:30:14.926  INFO 4316 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-08 00:30:14.942  INFO 4316 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-02-08 00:30:16.627  INFO 4316 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-08 00:30:16.633  INFO 4316 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-08 00:30:16.665  WARN 4316 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-08 00:30:16.986  WARN 4316 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 480207bc-f6a2-4baf-9c82-62be8f02d271
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-02-08 00:30:17.476  INFO 4316 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@24888d8b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@750b200b, org.springframework.security.web.context.SecurityContextPersistenceFilter@584fb03d, org.springframework.security.web.header.HeaderWriterFilter@2ce62e27, org.springframework.web.filter.CorsFilter@55c581e4, org.springframework.security.web.authentication.logout.LogoutFilter@4f1a5b93, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@43efe064, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@25d9298e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@eaa07bb, org.springframework.security.web.session.SessionManagementFilter@4a8bf1dc, org.springframework.security.web.access.ExceptionTranslationFilter@1add3e03]
+2023-02-08 00:30:17.754  INFO 4316 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/gestorProyectos/api'
+2023-02-08 00:30:17.763  INFO 4316 --- [main] com.uis.gestor.GestorApplication         : Started GestorApplication in 6.134 seconds (JVM running for 6.77)
+2023-02-08 00:30:26.665  INFO 4316 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/gestorProyectos/api]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-08 00:30:33.869  INFO 4316 --- [http-nio-8080-exec-3] c.u.g.service.interfaces.ITareaService   : La tarea con id 5 se FINALIZADA

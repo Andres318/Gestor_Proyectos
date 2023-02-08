@@ -1,1 +1,1 @@
-# Gestor_Proyectos
+# Getor Proyectos
