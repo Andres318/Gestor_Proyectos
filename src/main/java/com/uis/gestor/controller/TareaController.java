@@ -1,6 +1,9 @@
 package com.uis.gestor.controller;
 
+import com.uis.gestor.dto.GetTareasByParametrosDTO;
+import com.uis.gestor.dto.ProyectoDTO;
 import com.uis.gestor.dto.TareaDTO;
+import com.uis.gestor.repository.IProyectoRepository;
 import com.uis.gestor.service.interfaces.ITareaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @RestController
 @RequestMapping("/tarea")
@@ -81,6 +88,47 @@ public class TareaController {
     public ResponseEntity<List<TareaDTO>> getAllSinFinalizadosNiInactivos(){
         try {
             List<TareaDTO> tareaDTOList = this.iTareaService.getAllSinFinalizadosNiInactivos();
+            return new ResponseEntity<>(tareaDTOList, HttpStatus.OK);
+        }
+        catch (Exception exception) {
+            logger.error(String.valueOf(exception));
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getAllProyectos")
+    public ResponseEntity<List<ProyectoDTO>> getAllProyectos(){
+        try {
+            List<ProyectoDTO> tareaDTOList = this.iTareaService.getAllProyectos();
+            return new ResponseEntity<>(tareaDTOList, HttpStatus.OK);
+        }
+        catch (Exception exception) {
+            logger.error(String.valueOf(exception));
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+    @PostMapping("/getTareasByParametros")
+    public ResponseEntity<List<TareaDTO>> getTareasByParametros(@RequestBody @Valid GetTareasByParametrosDTO getTareasByParametrosDTO){
+        try {
+
+            Date toDate;
+            Date fromDate;
+            if (getTareasByParametrosDTO.getToDate()==null){
+                toDate = null;
+            }else {
+                toDate = new SimpleDateFormat("yyyy-MM-dd").parse(getTareasByParametrosDTO.getToDate());
+            }
+
+            if (getTareasByParametrosDTO.getFromDate()==null){
+                fromDate = null;
+            }else {
+                fromDate = new SimpleDateFormat("yyyy-MM-dd").parse(getTareasByParametrosDTO.getFromDate());
+            }
+
+            List<TareaDTO> tareaDTOList = this.iTareaService.getTareasByParametros(getTareasByParametrosDTO.getIdProyecto(), toDate, fromDate);
             return new ResponseEntity<>(tareaDTOList, HttpStatus.OK);
         }
         catch (Exception exception) {

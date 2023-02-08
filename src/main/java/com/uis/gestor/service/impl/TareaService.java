@@ -1,6 +1,8 @@
 package com.uis.gestor.service.impl;
 
+import com.uis.gestor.dto.ProyectoDTO;
 import com.uis.gestor.dto.TareaDTO;
+import com.uis.gestor.mapper.ProyectoMapper;
 import com.uis.gestor.mapper.TareaMapper;
 import com.uis.gestor.model.Proyecto;
 import com.uis.gestor.model.Tarea;
@@ -10,8 +12,10 @@ import com.uis.gestor.service.interfaces.ITareaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,6 +74,19 @@ public class TareaService implements ITareaService {
         return tareaDTOList.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
 
         /*return publicacionListResponse.stream().map(PublicacionMapper.INSTANCE::toPublicacionDTO).collect(Collectors.toList());*/
+    }
+
+    @Override
+    public List<ProyectoDTO> getAllProyectos(){
+        List<Proyecto> proyectoList = this.iProyectoRepository.findAll(Sort.by(Sort.Order.desc("id")));
+        return proyectoList.stream().map(ProyectoMapper.INSTANCE::toProyectoDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from){
+        List<Tarea> tareas = this.iTareaRepository.findAllByIdProyectoInOrIdProyectoIsNullOrFechaGreaterThanEqualOrFechaLessThanEqualOrderByIdDesc(idProyecto, to, from);
+        /*List<Tarea> tareas = this.iTareaRepository.findAllByIdProyectoInOrderByIdDesc(idProyecto);*/
+        return tareas.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
     }
 
 
