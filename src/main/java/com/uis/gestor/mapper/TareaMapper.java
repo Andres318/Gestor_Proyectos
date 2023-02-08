@@ -18,6 +18,7 @@ public interface TareaMapper {
 
     // Entity to Dto
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "nombreProyecto", source = "proyecto.nombre")
     TareaDTO toTareaDTO(Tarea tarea);
 
 }

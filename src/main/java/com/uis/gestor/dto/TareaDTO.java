@@ -35,7 +35,6 @@ public class TareaDTO implements Serializable {
     @NotNull
     private String estado;
 
-    @NotNull
-    private String nombre;
+    private String nombreProyecto;
 
 }

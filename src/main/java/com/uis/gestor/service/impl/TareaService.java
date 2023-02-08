@@ -2,7 +2,9 @@ package com.uis.gestor.service.impl;
 
 import com.uis.gestor.dto.TareaDTO;
 import com.uis.gestor.mapper.TareaMapper;
+import com.uis.gestor.model.Proyecto;
 import com.uis.gestor.model.Tarea;
+import com.uis.gestor.repository.IProyectoRepository;
 import com.uis.gestor.repository.ITareaRepository;
 import com.uis.gestor.service.interfaces.ITareaService;
 import org.slf4j.Logger;
@@ -20,6 +22,8 @@ public class TareaService implements ITareaService {
 
     private ITareaRepository iTareaRepository;
 
+    private IProyectoRepository iProyectoRepository;
+
     /*@Override
     public List<TareaDTO> getAll(){
         List<Tarea> tareaList = this.iTareaRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
@@ -31,7 +35,15 @@ public class TareaService implements ITareaService {
         tareaDTO.setId(null);
         Tarea tarea = TareaMapper.INSTANCE.toTarea(tareaDTO);
         Tarea tareaCreada = this.iTareaRepository.save(tarea);
-        return TareaMapper.INSTANCE.toTareaDTO(tareaCreada);
+
+        Proyecto proyecto = this.iProyectoRepository.findById(tareaCreada.getIdProyecto()).orElse(null);
+
+        TareaDTO tareaDTOResponse = TareaMapper.INSTANCE.toTareaDTO(tareaCreada);
+
+        assert proyecto != null;
+        tareaDTOResponse.setNombreProyecto(proyecto.getNombre());
+
+        return tareaDTOResponse;
     }
 
     @Override
@@ -64,6 +76,11 @@ public class TareaService implements ITareaService {
     @Autowired
     public void setiTareaRepository(ITareaRepository iTareaRepository) {
         this.iTareaRepository = iTareaRepository;
+    }
+
+    @Autowired
+    public void setiProyectoRepository(IProyectoRepository iProyectoRepository) {
+        this.iProyectoRepository = iProyectoRepository;
     }
 
 }

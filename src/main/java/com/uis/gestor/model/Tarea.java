@@ -43,9 +43,6 @@ public class Tarea implements Serializable {
     @Column(name = "estado", nullable = false)
     private String estado;
 
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
-
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
