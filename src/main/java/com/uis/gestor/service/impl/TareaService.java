@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,9 +86,65 @@ public class TareaService implements ITareaService {
 
     @Override
     public List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from){
-        List<Tarea> tareas = this.iTareaRepository.findAllByIdProyectoInOrIdProyectoIsNullOrFechaGreaterThanEqualOrFechaLessThanEqualOrderByIdDesc(idProyecto, to, from);
-        /*List<Tarea> tareas = this.iTareaRepository.findAllByIdProyectoInOrderByIdDesc(idProyecto);*/
-        return tareas.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
+
+        List<Tarea> allTareas =  new ArrayList<>();
+        List<Tarea> allTareasSinOrdenar =  new ArrayList<>();
+        List<Long> idsTaresAgregados =  new ArrayList<>();
+        List<List<Tarea>> listaDeListas = new ArrayList<>();
+        List<Tarea> tareasByIdProyecto;
+        List<Tarea> tareasByFechaRange;
+        List<Tarea> tareasByOnlyFechaFrom;
+        List<Tarea> tareasByOnlyFechaTo;
+
+        if (idProyecto == null && to == null && from == null){
+            allTareas = this.iTareaRepository.findAll();
+            return allTareas.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
+        }
+
+        if (idProyecto != null){
+            tareasByIdProyecto = this.iTareaRepository.findAllByIdProyectoInOrderByIdDesc(idProyecto);
+            listaDeListas.add(tareasByIdProyecto);
+        }
+
+        if (from != null && to != null){
+            tareasByFechaRange = this.iTareaRepository.findAllByFechaBetweenOrderByIdDesc(from, to);
+            listaDeListas.add(tareasByFechaRange);
+        }
+        else if (from != null ){
+            tareasByOnlyFechaFrom = this.iTareaRepository.findAllByFechaGreaterThanEqualOrderByIdDesc(from);
+            listaDeListas.add(tareasByOnlyFechaFrom);
+        }
+        else if (to != null ){
+            tareasByOnlyFechaTo = this.iTareaRepository.findAllByFechaLessThanEqualOrderByIdDesc(to);
+            listaDeListas.add(tareasByOnlyFechaTo);
+        }
+
+        for (List<Tarea> lista: listaDeListas) {
+            for (Tarea tarea: lista) {
+                if (!idsTaresAgregados.contains(tarea.getId())){
+                    idsTaresAgregados.add(tarea.getId());
+                    allTareasSinOrdenar.add(tarea);
+                }
+            }
+        }
+
+        List<Long> listaOrdenada = idsTaresAgregados.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+        for (Long idTarea: listaOrdenada) {
+            Boolean pass = Boolean.TRUE;
+            for (List<Tarea> lista: listaDeListas) {
+                for(Tarea tarea: lista){
+                    if (tarea.getId().equals(idTarea) && pass){
+                        allTareas.add(tarea);
+                        pass = Boolean.FALSE;
+                    }
+                }
+            }
+        }
+
+
+
+        return allTareas.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
     }
 
 
