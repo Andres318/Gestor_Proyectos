@@ -28,5 +28,7 @@ public interface ITareaRepository extends JpaRepository<Tarea, Long> {
 
     List<Tarea> findAllByFechaBetweenOrderByIdDesc(Date from, Date to);
 
+    List<Tarea> findAllByDescripcionLikeOrderByIdDesc(String descripcionTarea);
+
 
 }

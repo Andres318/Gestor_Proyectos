@@ -3,7 +3,6 @@ package com.uis.gestor.controller;
 import com.uis.gestor.dto.GetTareasByParametrosDTO;
 import com.uis.gestor.dto.ProyectoDTO;
 import com.uis.gestor.dto.TareaDTO;
-import com.uis.gestor.repository.IProyectoRepository;
 import com.uis.gestor.service.interfaces.ITareaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +15,6 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @RestController
 @RequestMapping("/tarea")
@@ -128,7 +125,7 @@ public class TareaController {
                 fromDate = new SimpleDateFormat("yyyy-MM-dd").parse(getTareasByParametrosDTO.getFromDate());
             }
 
-            List<TareaDTO> tareaDTOList = this.iTareaService.getTareasByParametros(getTareasByParametrosDTO.getIdProyecto(), toDate, fromDate);
+            List<TareaDTO> tareaDTOList = this.iTareaService.getTareasByParametros(getTareasByParametrosDTO.getIdProyecto(), toDate, fromDate, getTareasByParametrosDTO.getDescripcionTarea());
             return new ResponseEntity<>(tareaDTOList, HttpStatus.OK);
         }
         catch (Exception exception) {
