@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ITareaRepository extends JpaRepository<Tarea, Long> {
 
-    List<Tarea> findAllByEstadoNotLikeAndEstadoNotLikeOrderById(String finalizado, String inactivo);
+    List<Tarea> findAllByEstadoNotLikeAndEstadoNotLikeOrderByIdDesc(String finalizado, String inactivo);
 
 
 }

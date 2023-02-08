@@ -54,7 +54,7 @@ public class TareaService implements ITareaService {
 
     @Override
     public List<TareaDTO> getAllSinFinalizadosNiInactivos(){
-        List<Tarea> tareaDTOList = this.iTareaRepository.findAllByEstadoNotLikeAndEstadoNotLikeOrderById("FINALIZADA", "INACTIVA");
+        List<Tarea> tareaDTOList = this.iTareaRepository.findAllByEstadoNotLikeAndEstadoNotLikeOrderByIdDesc("FINALIZADA", "INACTIVA");
         return tareaDTOList.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
 
         /*return publicacionListResponse.stream().map(PublicacionMapper.INSTANCE::toPublicacionDTO).collect(Collectors.toList());*/
