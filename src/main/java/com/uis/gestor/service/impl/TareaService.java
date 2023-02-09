@@ -87,7 +87,9 @@ public class TareaService implements ITareaService {
     @Override
     public List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from, String descripcionTarea, String estado){
 
-        List<Tarea> allTareas =  new ArrayList<>();
+        List<Tarea> tareasFiltradas = this.iTareaRepository.findByParams(idProyecto.get(0), to, from, descripcionTarea, estado);
+
+        /**List<Tarea> allTareas =  new ArrayList<>();
         List<Tarea> allTareasSinOrdenar =  new ArrayList<>();
         List<Tarea> tareasTest =  new ArrayList<>();
         List<Long> idsTaresAgregados =  new ArrayList<>();
@@ -159,11 +161,11 @@ public class TareaService implements ITareaService {
                     }
                 }
             }
-        }
+        }**/
 
 
 
-        return allTareas.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
+        return tareasFiltradas.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
     }
 
 
