@@ -30,5 +30,6 @@ public interface ITareaRepository extends JpaRepository<Tarea, Long> {
 
     List<Tarea> findAllByDescripcionLikeOrderByIdDesc(String descripcionTarea);
 
+    List<Tarea> findAllByEstadoLikeOrderByIdDesc(String estado);
 
 }

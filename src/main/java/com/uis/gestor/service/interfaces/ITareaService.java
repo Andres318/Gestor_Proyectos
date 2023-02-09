@@ -15,6 +15,6 @@ public interface ITareaService {
 
     List<ProyectoDTO> getAllProyectos();
 
-    List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from, String descripcionTarea);
+    List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from, String descripcionTaream, String estado);
     /*List<TareaDTO> getAll();*/
 }

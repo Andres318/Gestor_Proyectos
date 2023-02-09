@@ -85,7 +85,7 @@ public class TareaService implements ITareaService {
     }
 
     @Override
-    public List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from, String descripcionTarea){
+    public List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from, String descripcionTarea, String estado){
 
         List<Tarea> allTareas =  new ArrayList<>();
         List<Tarea> allTareasSinOrdenar =  new ArrayList<>();
@@ -94,11 +94,12 @@ public class TareaService implements ITareaService {
         List<List<Tarea>> listaDeListas = new ArrayList<>();
         List<Tarea> tareasByIdProyecto;
         List<Tarea> tareasByDescripcion;
+        List<Tarea> tareasByEstado;
         List<Tarea> tareasByFechaRange;
         List<Tarea> tareasByOnlyFechaFrom;
         List<Tarea> tareasByOnlyFechaTo;
 
-        if (idProyecto == null && to == null && from == null && descripcionTarea == null){
+        if (idProyecto == null && to == null && from == null && descripcionTarea == null && estado == null){
             allTareas = this.iTareaRepository.findAll(Sort.by(Sort.Order.desc("id")));
             return allTareas.stream().map(TareaMapper.INSTANCE::toTareaDTO).collect(Collectors.toList());
         }
@@ -106,6 +107,12 @@ public class TareaService implements ITareaService {
         if (idProyecto != null){
             tareasByIdProyecto = this.iTareaRepository.findAllByIdProyectoInOrderByIdDesc(idProyecto);
             listaDeListas.add(tareasByIdProyecto);
+        }
+
+        if (estado != null){
+            estado = "%" + estado + "%";
+            tareasByEstado = this.iTareaRepository.findAllByEstadoLikeOrderByIdDesc(estado);
+            listaDeListas.add(tareasByEstado);
         }
 
         if (descripcionTarea != null){

@@ -125,7 +125,7 @@ public class TareaController {
                 fromDate = new SimpleDateFormat("yyyy-MM-dd").parse(getTareasByParametrosDTO.getFromDate());
             }
 
-            List<TareaDTO> tareaDTOList = this.iTareaService.getTareasByParametros(getTareasByParametrosDTO.getIdProyecto(), toDate, fromDate, getTareasByParametrosDTO.getDescripcionTarea());
+            List<TareaDTO> tareaDTOList = this.iTareaService.getTareasByParametros(getTareasByParametrosDTO.getIdProyecto(), toDate, fromDate, getTareasByParametrosDTO.getDescripcionTarea(), getTareasByParametrosDTO.getEstado());
             return new ResponseEntity<>(tareaDTOList, HttpStatus.OK);
         }
         catch (Exception exception) {

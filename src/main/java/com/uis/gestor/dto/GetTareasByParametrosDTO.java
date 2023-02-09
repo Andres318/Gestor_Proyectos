@@ -24,4 +24,6 @@ public class GetTareasByParametrosDTO implements Serializable {
 
     private String descripcionTarea;
 
+    private String estado;
+
 }
