@@ -87,6 +87,9 @@ public class TareaService implements ITareaService {
     @Override
     public List<TareaDTO> getTareasByParametros(List<Long> idProyecto, Date to, Date from, String descripcionTarea, String estado){
 
+        if (descripcionTarea != null){
+            descripcionTarea = "%" + descripcionTarea + "%";
+        }
         List<Tarea> tareasFiltradas = this.iTareaRepository.findByParams(idProyecto.get(0), to, from, descripcionTarea, estado);
 
         /**List<Tarea> allTareas =  new ArrayList<>();

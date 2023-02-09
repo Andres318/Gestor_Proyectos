@@ -2,6 +2,7 @@ package com.uis.gestor.repository;
 
 import com.uis.gestor.model.Tarea;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -32,13 +33,13 @@ public interface ITareaRepository extends JpaRepository<Tarea, Long> {
 
     List<Tarea> findAllByEstadoLikeOrderByIdDesc(String estado);
 
-    "SELECT t FROM Tarea t "+
-    " WHERE t.estaddo = :estado " +
+    @Query("SELECT t FROM Tarea t "+
+    " WHERE t.estado = :estado " +
     " AND ( t.idProyecto = :idProyecto OR :idProyecto IS NULL)" +
-    " AND ( t.fecha >= :toDate OR :toDate IS NULL)" +
-    " AND ( t.fecha <= :fromDate OR :fromDate IS NULL)" +
-    " AND ( t.descripcion LIKE descripcionTarea OR :descripcionTarea IS NULL)" +
-    " ORDER BY t.id desc"
+    " AND ( t.fecha <= :toDate OR  (cast(:toDate as timestamp)) IS NULL)" +
+    " AND ( t.fecha >= :fromDate OR (cast(:fromDate as timestamp)) IS NULL)" +
+    " AND ( t.descripcion LIKE :descripcionTarea OR :descripcionTarea IS NULL)" +
+    " ORDER BY t.id desc")
     List<Tarea> findByParams(Long idProyecto, Date toDate, Date fromDate, String descripcionTarea, String estado);
 
 }
