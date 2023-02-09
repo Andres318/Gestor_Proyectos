@@ -35,10 +35,10 @@ public interface ITareaRepository extends JpaRepository<Tarea, Long> {
 
     @Query("SELECT t FROM Tarea t "+
     " WHERE t.estado = :estado " +
-    " AND ( t.idProyecto = :idProyecto OR :idProyecto IS NULL)" +
-    " AND ( t.fecha <= :toDate OR  (cast(:toDate as timestamp)) IS NULL)" +
-    " AND ( t.fecha >= :fromDate OR (cast(:fromDate as timestamp)) IS NULL)" +
-    " AND ( t.descripcion LIKE :descripcionTarea OR :descripcionTarea IS NULL)" +
+    " AND ( t.idProyecto = :idProyecto OR :idProyecto IS NULL) " +
+    " AND ( t.fecha <= :toDate OR  (cast(:toDate as timestamp)) IS NULL) " +
+    " AND ( t.fecha >= :fromDate OR (cast(:fromDate as timestamp)) IS NULL) " +
+    " AND ( t.descripcion LIKE :descripcionTarea OR :descripcionTarea IS NULL) " +
     " ORDER BY t.id desc")
     List<Tarea> findByParams(Long idProyecto, Date toDate, Date fromDate, String descripcionTarea, String estado);
 
