@@ -89,6 +89,7 @@ public class TareaService implements ITareaService {
 
         List<Tarea> allTareas =  new ArrayList<>();
         List<Tarea> allTareasSinOrdenar =  new ArrayList<>();
+        List<Tarea> tareasTest =  new ArrayList<>();
         List<Long> idsTaresAgregados =  new ArrayList<>();
         List<List<Tarea>> listaDeListas = new ArrayList<>();
         List<Tarea> tareasByIdProyecto;
@@ -108,6 +109,7 @@ public class TareaService implements ITareaService {
         }
 
         if (descripcionTarea != null){
+            descripcionTarea = "%" + descripcionTarea + "%";
             tareasByDescripcion = this.iTareaRepository.findAllByDescripcionLikeOrderByIdDesc(descripcionTarea);
             listaDeListas.add(tareasByDescripcion);
         }
@@ -124,6 +126,10 @@ public class TareaService implements ITareaService {
             tareasByOnlyFechaTo = this.iTareaRepository.findAllByFechaLessThanEqualOrderByIdDesc(to);
             listaDeListas.add(tareasByOnlyFechaTo);
         }
+
+        logger.info("------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        //tareasTest = this.iTareaRepository.findAllByIdProyectoInOrIdProyectoIsNullAndFechaGreaterThanEqualOrFechaLessThanEqualAndDescripcionLikeOrderByIdDesc(idProyecto, to, from, descripcionTarea);
+        logger.info("------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (List<Tarea> lista: listaDeListas) {
             for (Tarea tarea: lista) {

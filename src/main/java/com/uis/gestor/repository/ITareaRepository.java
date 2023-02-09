@@ -14,7 +14,7 @@ public interface ITareaRepository extends JpaRepository<Tarea, Long> {
 
     /*List<Tarea> findAllByIdProyectoInOrIdProyectoIsNullOrFechaBetweenOrderByIdDesc(List<Long> idProyecto, Date to, Date from);*/
 
-    /*List<Tarea> findAllByIdProyectoInOrIdProyectoIsNullAndFechaGreaterThanEqualOrFechaLessThanEqualOrderByIdDesc(List<Long> idProyecto, Date to, Date from);*/
+    List<Tarea> findAllByIdProyectoInOrIdProyectoIsNullAndFechaGreaterThanEqualOrFechaLessThanEqualAndDescripcionLikeOrderByIdDesc(List<Long> idProyecto, Date to, Date from, String descripcion);
 
     List<Tarea> findAllByIdProyectoInOrderByIdDesc(List<Long> idProyecto);
 
